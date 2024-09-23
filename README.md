@@ -3,7 +3,7 @@
 #### I am a tech enthusist and I enjoy coding and stuffs (secretly I'm into all of tech 👀).
 
 ### Github stats:
-![ImtiazKun's github stats](https://github-readme-stats.vercel.app/api?username=heisenberg-611&show_icons=true&theme=radical&hide=stars,commits,prs,issues)
+![ImtiazKun's github stats](https://github-readme-stats.vercel.app/api?username=heisenberg-611&show_icons=true&theme=radical&hide=stars,prs,issues)
 
 
 
