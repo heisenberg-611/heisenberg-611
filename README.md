@@ -1,10 +1,10 @@
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
 ### Hi there 👋, I am Dhrubojyoti Saha.
 ###### [View Facebook](https://www.facebook.com/dhrubo.12206111/)
 #### I am a tech enthusist and I enjoy coding and stuffs (secretly I'm into all of tech 👀).
 
 ### Github stats:
 ![ImtiazKun's github stats](https://github-readme-stats.vercel.app/api?username=heisenberg-611&show_icons=true&theme=radical&hide=stars,prs,issues)
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
 
 
 
