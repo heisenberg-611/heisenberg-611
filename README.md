@@ -1,16 +1,14 @@
-## Hi there 👋
+### Hi there 👋, I am Dhrubojyoti Saha.
+###### [View Facebook](https://www.facebook.com/dhrubo.12206111/)
+#### I am a tech enthusist and I enjoy coding and stuffs (secretly I'm into all of tech 👀).
 
-<!--
-**heisenberg-611/heisenberg-611** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+### Github stats:
+![ImtiazKun's github stats](https://github-readme-stats.vercel.app/api?username=heisenberg-611&show_icons=true&theme=radical&hide=stars,commits,prs,issues)
 
-Here are some ideas to get you started:
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+
+- 📫 How to reach me: Mail me dhrubojyoti.saha@g.bracu.ac.bd
+- ⚡ Fun fact: I love watching anime and listening to music. 
+
+
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=heisenberg-611&layout=compact)
