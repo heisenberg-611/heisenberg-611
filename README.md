@@ -1,4 +1,3 @@
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=heisenberg-611&repo=github-readme-stats)](https://github.com/heisenberg-611/github-readme-stats)
 ### Hi there 👋, I am Dhrubojyoti Saha.
 ###### [View Facebook](https://www.facebook.com/dhrubo.12206111/)
 #### I am a tech enthusist and I enjoy coding and stuffs (secretly I'm into all of tech 👀).
