@@ -4,6 +4,7 @@
 
 ### Github stats:
 ![ImtiazKun's github stats](https://github-readme-stats.vercel.app/api?username=heisenberg-611&show_icons=true&theme=radical&hide=stars,prs,issues)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
 
 
 
