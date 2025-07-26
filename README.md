@@ -35,6 +35,12 @@
     <a title="JUnit" href="https://github.com/junit-team" target="_blank">
         <img src="https://avatars.githubusercontent.com/u/874086?s=200&v=4" alt="junit" width="45" height="45" />
     </a>
+    <a title="Linux" href="" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="linux" width="45" height="45" />
+    </a>
+    <a title="Tomcat" href="http://tomcat.apache.org/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Apache_Tomcat_logo.svg/1280px-Apache_Tomcat_logo.svg.png" alt="tomcat" width="45" height="" />
+    </a>
 </p>
 <p align="left">
     <a title="Oracle DB" href="https://www.oracle.com/in/database/" target="_blank">
@@ -73,20 +79,15 @@
     <a title="Postman" href="https://postman.com" target="_blank">
         <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="45" height="45" />
     </a>
-    <a title="Linux" href="" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="linux" width="45" height="45" />
-    </a>
-    <a title="Tomcat" href="http://tomcat.apache.org/" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Apache_Tomcat_logo.svg/1280px-Apache_Tomcat_logo.svg.png" alt="tomcat" width="45" height="" />
-    </a>
+    
 </p>
 
 <h2>🏆 Github Stats</h2>
 
 <p align="center"> 
-  <img src="https://github-readme-stats.vercel.app/api?username=heisenberg-611&theme=radical&show_icons=true" alt="Dhrubo's Github Stats" width="45%"/>
-  <img  src="https://github-readme-streak-stats.herokuapp.com/?user=heisenberg-611&theme=dark" width="45%">
-    <img  src="https://github-readme-stats.vercel.app/api/top-langs/?username=heisenberg-611&layout=compact&theme=dark&hide=css,scss,Handlebars,Makefile,Less&langs_count=10" width="40%">
+  <img src="https://github-readme-stats.vercel.app/api?username=heisenberg-611&theme=light&show_icons=true" alt="Dhrubo's Github Stats" width="45%"/>
+  <img  src="https://github-readme-streak-stats.herokuapp.com/?user=heisenberg-611&theme=light" width="48%">
+    <img  src="https://github-readme-stats.vercel.app/api/top-langs/?username=heisenberg-611&layout=compact&theme=light&hide=css,scss,Handlebars,Makefile,Less&langs_count=20" width="35%">
 </p>
 
 - 📫 How to reach me: Mail me dhrubojyoti.saha@g.bracu.ac.bd
