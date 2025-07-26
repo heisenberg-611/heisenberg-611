@@ -81,9 +81,6 @@
     </a>
 </p>
 
-### Github stats:
-![Dhrubo's github stats](https://github-readme-stats.vercel.app/api?username=heisenberg-611&show_icons=true&theme=radical&hide=stars,prs,issues)
-
 <h2>🏆 Github Stats</h2>
 
 <p align="center"> 
@@ -94,6 +91,3 @@
 
 - 📫 How to reach me: Mail me dhrubojyoti.saha@g.bracu.ac.bd
 - ⚡ Fun fact: I love watching anime and listening to music. 
-
-
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=heisenberg-611&layout=compact)
