@@ -64,9 +64,6 @@
     <a title="Kubernetes" href="https://kubernetes.io/" target="_blank">
         <img src="https://raw.githubusercontent.com/gilbarbara/logos/f4c8e8b933aa80ce83b6d6d387e016bf4cb4e376/logos/kubernetes.svg" alt="kubernetes" width="45" height="45" />
     </a>
-    <a title="Helm" href="https://helm.sh/docs/" target="_blank">
-        <img src="resources/helm.svg" alt="Helm" width="45" height="45" />
-    </a>
     <a title="AWS" href="https://aws.amazon.com" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="aws" width="45" height="45" />
     </a>
