@@ -1,6 +1,6 @@
-### Hi there 👋, I am Dhrubojyoti Saha.
-###### [View Facebook](https://www.facebook.com/dhrubo.12206111/)
+## Hi there 👋, I am Dhrubojyoti Saha.
 #### I am a tech enthusist and I enjoy coding and stuffs (secretly I'm into all of tech 👀).
+#### Currently pesuing undergrad at *BRAC University*
 
 <h2>🛠 My Toolkit</h2>
 
