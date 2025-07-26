@@ -17,12 +17,6 @@
     <a title="Hibernate" href="https://github.com/hibernate" target="_blank">
         <img src="https://raw.githubusercontent.com/gilbarbara/logos/f4c8e8b933aa80ce83b6d6d387e016bf4cb4e376/logos/hibernate.svg" alt="Hibernate" width="45" height="45" />
     </a>
-    <a title="Go" href="https://golang.org/" target="_blank">
-        <img src="resources/gopher.svg" alt="golang" width="45" height="45" />
-    </a>
-    <a title="Kafka" href="https://kafka.apache.org/" target="_blank">
-        <img src="resources/kafkalogo.svg" alt="kafka" width="50" height="48" />
-    </a>
     <a title="JavaScript" href="" target="_blank">
         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="45" height="45" />
     </a>
