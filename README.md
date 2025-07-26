@@ -84,7 +84,13 @@
 ### Github stats:
 ![Dhrubo's github stats](https://github-readme-stats.vercel.app/api?username=heisenberg-611&show_icons=true&theme=radical&hide=stars,prs,issues)
 
+<h2>🏆 Github Stats</h2>
 
+<p align="center"> 
+  <img src="https://github-readme-stats.vercel.app/api?username=heisenberg-611&theme=radical&show_icons=true" alt="Dhrubo's Github Stats" width="45%"/>
+  <img  src="https://github-readme-streak-stats.herokuapp.com/?user=heisenberg-611&theme=dark" width="45%">
+    <img  src="https://github-readme-stats.vercel.app/api/top-langs/?username=heisenberg-611&layout=compact&theme=dark&hide=css,scss,Handlebars,Makefile,Less&langs_count=10" width="40%">
+</p>
 
 - 📫 How to reach me: Mail me dhrubojyoti.saha@g.bracu.ac.bd
 - ⚡ Fun fact: I love watching anime and listening to music. 
