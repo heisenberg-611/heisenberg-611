@@ -1,6 +1,6 @@
 ## Hi there 👋, I am Dhrubojyoti Saha.
 #### I am a tech enthusist and I enjoy coding and stuffs (secretly I'm into all of tech 👀).
-#### Currently pesuing undergrad at *BRAC University*
+#### Currently persuing undergrad at *BRAC University*
 
 <h2>🛠 My Toolkit</h2>
 
@@ -85,7 +85,7 @@
 <h2>🏆 Github Stats</h2>
 
 <p align="center"> 
-  <img src="https://github-readme-stats.vercel.app/api?username=heisenberg-611&theme=light&show_icons=true" alt="Dhrubo's Github Stats" width="45%"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=heisenberg-611&theme=transperant_icons=true" alt="Dhrubo's Github Stats" width="45%"/>
   <img  src="https://github-readme-streak-stats.herokuapp.com/?user=heisenberg-611&theme=light" width="48%">
     <img  src="https://github-readme-stats.vercel.app/api/top-langs/?username=heisenberg-611&layout=compact&theme=light&hide=css,scss,Handlebars,Makefile,Less&langs_count=20" width="35%">
 </p>
