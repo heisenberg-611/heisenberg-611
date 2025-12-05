@@ -85,9 +85,7 @@
 <h2>🏆 Github Stats</h2>
 
 <p align="center"> 
-  <img src="https://github-readme-stats.vercel.app/api?username=heisenberg-611&theme=transperant_icons=true" alt="Dhrubo's Github Stats" width="45%"/>
   <img  src="https://github-readme-streak-stats.herokuapp.com/?user=heisenberg-611&theme=light" width="48%">
-    <img  src="https://github-readme-stats.vercel.app/api/top-langs/?username=heisenberg-611&layout=compact&theme=light&hide=css,scss,Handlebars,Makefile,Less&langs_count=20" width="35%">
 </p>
 
 - 📫 How to reach me: Mail me dhrubojyoti.saha@g.bracu.ac.bd
