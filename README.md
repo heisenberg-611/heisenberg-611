@@ -82,11 +82,5 @@
     
 </p>
 
-<h2>🏆 Github Stats</h2>
-
-<p align="center"> 
-  <img  src="https://github-readme-streak-stats.herokuapp.com/?user=heisenberg-611&theme=light" width="48%">
-</p>
-
 - 📫 How to reach me: Mail me dhrubojyoti.saha@g.bracu.ac.bd
 - ⚡ Fun fact: I love watching anime and listening to music. 
