@@ -28,7 +28,7 @@
 
 <p align="center">
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&random=false&width=435&lines=heisenberg-611" alt="heisenberg" /></a>
-<a href="https://github.com/heisenberg-611/readme-typing-svg"><img src="https://readme-typing-svg.demolab.com/?lines=Algorithms+%26+AI;BRAC+University;Always+learning+new+things&font=Fira%20Code&center=true&width=440&height=45&color=f75c7e&vCenter=true&pause=1000&size=22" /></a>
+<a href="https://github.com/heisenberg-611/readme-typing-svg"><img src="https://readme-typing-svg.demolab.com/?lines=Technology+%26+AI;BRAC+University;Always+learning+new+things&font=Fira%20Code&center=true&width=440&height=45&color=f75c7e&vCenter=true&pause=1000&size=22" /></a>
 </p>
 
 <!-- Social icons -->
@@ -52,8 +52,8 @@
 
 <br/>
 
-<details open>
-<summary><h2>💻 My favorite tools and technologies</h2></summary>
+
+<h2>💻 My favorite tools and technologies</h2>
 <div style="display: flex; align-items: flex-start; align: center">
 <table align="center">
   <tr>
@@ -174,10 +174,9 @@
  </tr>
 </table>
 <br><br>
-</details>
 
-<details>
-<summary><h2>📊 GitHub Stats & Activity</h2></summary>
+
+<h2>📊 GitHub Stats & Activity</h2>
 
 <h3>🔥 Streak Stats</h3>
 <p>
@@ -185,17 +184,6 @@
 <img title="🔥 Streak stats" alt="heisenberg-611's streak" src="https://streak-stats.demolab.com/?user=heisenberg-611&theme=monokai-metallian&hide_border=true"/>
 </a>
 </p>
-
-<h3>💻 GitHub Profile Stats</h3>
-<a href="https://github.com/anuraghazra/github-readme-stats">
-  <img alt="heisenberg-611's Github Stats" src="https://github-readme-stats.vercel.app/api?username=heisenberg-611&show_icons=true&include_all_commits=true&count_private=true&theme=react&hide_border=true&bg_color=1F222E&title_color=F85D7F&icon_color=F8D866" height="192px"/>
-</a>
-<a href="https://github.com/anuraghazra/github-readme-stats">
-  <img alt="Top Languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=heisenberg-611&langs_count=6&layout=compact&theme=react&hide_border=true&bg_color=1F222E&title_color=F85D7F&icon_color=F8D866" height="192px"/>
-</a>
-
-<br/>
-<b>Note:</b> Top languages reflects public repo activity, not full expertise.
 
 <a href="https://github.com/ashutosh00710/github-readme-activity-graph">
   <img alt="Activity Graph" src="https://github-readme-activity-graph.vercel.app/graph/?username=heisenberg-611&bg_color=1F222E&color=F8D866&line=F85D7F&point=FFFFFF&hide_border=true" />
@@ -205,6 +193,5 @@
 <!-- You can auto-update this using GitHub Actions -->
 <i>Check out my pinned repos! 🔖</i>
 
-</details>
 
-<img src="https://raw.githubusercontent.com/heisenberg-611/heisenberg-611/main/github-contribution-grid-snake.svg" alt="snake contribution graph" style="max-width: 100%;">
+<img src="./github-contribution-grid-snake.svg" alt="snake contribution graph" style="max-width: 100%;">
