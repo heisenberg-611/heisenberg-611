@@ -1,5 +1,4 @@
 ### Hi there 👋 I am Dhrubojyoti Saha
-[![](https://github.com/heisenberg-611/heisenberg-611/blob/main/chat.svg)](https://twitter.com/heisenberg_611)
 <h2 align="center">A curious learner passionate about Technology</h2>
 <h4 align="center"> Undergraduate student at BRAC University </h4>
 <h4 align="center"> Always eager to learn, build, and solve real-world problems </h4>
