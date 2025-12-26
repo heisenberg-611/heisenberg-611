@@ -26,32 +26,23 @@
 - 💡 Love solving puzzles—especially via code  
 - 🤝 Open to collaboration on open-source or academic projects  
 
+
 <p align="center">
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&random=false&width=435&lines=heisenberg-611" alt="heisenberg" /></a>
-<a href="https://github.com/heisenberg-611/readme-typing-svg"><img src="https://readme-typing-svg.demolab.com/?lines=Technology+%26+AI;BRAC+University;Always+learning+new+things&font=Fira%20Code&center=true&width=440&height=45&color=f75c7e&vCenter=true&pause=1000&size=22" /></a>
+  <a href="https://git.io/typing-svg">
+    <img 
+      src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1200&center=true&width=720&size=22&lines=heisenberg-611;CS+Undergrad+at+BRAC+University;Exploring+AI+and+Computer+Systems"
+      alt="heisenberg"
+    />
+  </a>
 </p>
-
-<!-- Social icons -->
 <p align="center">
-<a href="https://twitter.com/heisenberg_611"><img width="32px" alt="Twitter" title="Twitter" src="https://i.imgur.com/OXZM1L6.png"/></a>
-&#8287;&#8287;&#8287;&#8287;&#8287;
-<!-- Add or replace links as needed -->
-<a href="https://linkedin.com/in/heisenberg-611"><img width="32px" alt="LinkedIn" title="LinkedIn" src="https://i.imgur.com/JD3b1dU.png"/></a>
-&#8287;&#8287;&#8287;&#8287;&#8287;
-<a href="https://dev.to/heisenberg611"><img width="32px" alt="Dev.to" title="Dev.to" src="https://i.imgur.com/mVm29vK.png"></a>
+  <a href="https://github.com/heisenberg-611/readme-typing-svg">
+    <img 
+      src="https://readme-typing-svg.demolab.com/?font=Fira+Code&center=true&width=720&height=45&size=18&color=f75c7e&vCenter=true&pause=1000&lines=Fact%3A+The+first+computer+bug+was+a+real+moth;Fact%3A+Linux+powers+most+of+the+internet;Believes+learning+never+stops;Curious+about+AI%2C+security%2C+and+systems"
+      alt="Typing SVG"
+    />
+  </a>
 </p>
-<br/>
-
-<!-- Stats badges -->
-<p align="center">
-<a href="https://github.com/heisenberg-611?tab=repositories&sort=stargazers">
-<img alt="total stars" title="Total stars on GitHub" src="https://custom-icon-badges.demolab.com/github/stars/heisenberg-611?color=55960c&style=for-the-badge&labelColor=488207&logo=star"/></a>
-<a href="https://github.com/heisenberg-611?tab=followers">
-<img alt="followers" title="Follow me on Github" src="https://custom-icon-badges.demolab.com/github/followers/heisenberg-611?color=236ad3&labelColor=1155ba&style=for-the-badge&logo=person-add&label=Follow&logoColor=white"/></a>
-</p>
-
-<br/>
-
 
 <h2>💻 My favorite tools and technologies</h2>
 <div style="display: flex; align-items: flex-start; align: center">
@@ -174,24 +165,32 @@
  </tr>
 </table>
 <br><br>
-
+  
+<p align="center">
+<img src="./github-contribution-grid-snake.svg" alt="snake contribution graph" style="max-width: 100%;">
+</p>
 
 <h2>📊 GitHub Stats & Activity</h2>
 
 <h3>🔥 Streak Stats</h3>
-<p>
-<a href="https://github.com/heisenberg-611/github-readme-streak-stats">
-<img title="🔥 Streak stats" alt="heisenberg-611's streak" src="https://streak-stats.demolab.com/?user=heisenberg-611&theme=monokai-metallian&hide_border=true"/>
-</a>
+
+<p align="center">
+  <a href="https://github.com/heisenberg-611/github-readme-streak-stats">
+    <img 
+      title="🔥 Streak stats" 
+      alt="heisenberg-611's streak" 
+      src="https://streak-stats.demolab.com/?user=heisenberg-611&theme=monokai-metallian&hide_border=true"
+    />
+  </a>
 </p>
 
-<a href="https://github.com/ashutosh00710/github-readme-activity-graph">
-  <img alt="Activity Graph" src="https://github-readme-activity-graph.vercel.app/graph/?username=heisenberg-611&bg_color=1F222E&color=F8D866&line=F85D7F&point=FFFFFF&hide_border=true" />
-</a>
+<p align="center">
+  <a href="https://github.com/ashutosh00710/github-readme-activity-graph">
+    <img 
+      alt="Activity Graph" 
+      src="https://github-readme-activity-graph.vercel.app/graph/?username=heisenberg-611&bg_color=1F222E&color=F8D866&line=F85D7F&point=FFFFFF&hide_border=true"
+    />
+  </a>
+</p>
 
-<h3>⚡ Recent Activity</h3>
-<!-- You can auto-update this using GitHub Actions -->
-<i>Check out my pinned repos! 🔖</i>
 
-
-<img src="./github-contribution-grid-snake.svg" alt="snake contribution graph" style="max-width: 100%;">
