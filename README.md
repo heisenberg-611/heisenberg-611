@@ -171,18 +171,6 @@
 
 <h2>📊 GitHub Stats & Activity</h2>
 
-<h3>🔥 Streak Stats</h3>
-
-<p align="center">
-  <a href="https://github.com/heisenberg-611/github-readme-streak-stats">
-    <img 
-      title="🔥 Streak stats" 
-      alt="heisenberg-611's streak" 
-      src="https://streak-stats.demolab.com/?user=heisenberg-611&theme=monokai-metallian&hide_border=true"
-    />
-  </a>
-</p>
-
 <p align="center">
   <a href="https://github.com/ashutosh00710/github-readme-activity-graph">
     <img 
