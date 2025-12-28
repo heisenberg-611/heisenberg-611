@@ -158,9 +158,10 @@
       <br>GraphQL
     </td>
     <td align="center" width="96">
-        <img src="https://skillicons.dev/icons?i=postgres" width="48" height="48" alt="PostgreSQL" />
-      <br>PostgreSQL
-    </td>
+  <img src="https://skillicons.dev/icons?i=rust" width="48" height="48" alt="Rust" />
+  <br>Rust
+</td>
+
  </tr>
 </table>
 <br>
