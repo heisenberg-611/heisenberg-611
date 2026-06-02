@@ -36,8 +36,8 @@
 </p>
 <p align="center">
   <a href="https://github.com/heisenberg-611/readme-typing-svg">
-    <img 
-      src="https://readme-typing-svg.demolab.com/?font=Fira+Code&center=true&width=720&height=45&size=18&color=f75c7e&vCenter=true&pause=1000&lines=Fact%3A+The+first+computer+bug+was+a+real+moth;Fact%3A+Linux+powers+most+of+the+internet;Believes+learning+never+stops;Curious+about+AI%2C+security%2C+and+systems"
+    <img
+      src="https://readme-typing-svg.demolab.com/?font=Fira+Code&center=true&width=900&height=45&size=18&color=f75c7e&vCenter=true&pause=1500&duration=3500&lines=Fact%3A+The+first+computer+bug+was+a+real+moth;Fact%3A+Linux+powers+most+of+the+internet;Fact%3A+The+internet+weighs+about+the+same+as+a+strawberry;Fact%3A+More+than+90%25+of+the+world%27s+data+was+created+recently;Fact%3A+Email+is+older+than+the+World+Wide+Web;Fact%3A+The+Apollo+11+computer+had+less+power+than+a+calculator;Code+is+poetry+written+for+machines;Learning+never+stops;Stay+curious%2C+stay+dangerous;The+more+you+know%2C+the+more+you+realize+you+don%27t+know;Question+everything%2C+including+this+line;Reality+is+often+stranger+than+fiction;Freedom+begins+with+critical+thinking;Power+without+accountability+is+dangerous;Democracy+works+best+when+citizens+participate;Ideas+change+the+world+before+people+do;Seek+truth%2C+not+comfort;Think+deeply%2C+build+boldly;Curious+about+AI%2C+security%2C+and+systems"
       alt="Typing SVG"
     />
   </a>
