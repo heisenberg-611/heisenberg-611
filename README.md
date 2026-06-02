@@ -29,7 +29,7 @@
 <p align="center">
   <a href="https://git.io/typing-svg">
     <img 
-      src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1200&center=true&width=720&size=22&lines=heisenberg-611;CS+Undergrad+at+BRAC+University;Exploring+AI+and+Computer+Systems"
+      src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1200&center=true&width=900&size=22&lines=heisenberg-611;Dhrubo+Jyoti;CS+Undergrad+at+BRAC+University;Machine+Learning+Enthusiast;Exploring+AI+and+Computer+Systems;Building+Projects+One+Commit+at+a+Time;Learning+Never+Stops;Turning+Coffee+Into+Code;Debugging+Life+and+Software;Curious+About+Security+and+Distributed+Systems;Open+Source+Learner;Always+Asking+Why;Think.+Build.+Break.+Learn.;Data+Tells+Stories;There+Is+No+Cloud+Just+Someone+Else%27s+Computer"
       alt="heisenberg"
     />
   </a>
