@@ -36,28 +36,65 @@ I'm a CS undergraduate who likes going one layer deeper than the abstraction I'm
 
 ## Tech Stack
 
+<div align="center">
 <table>
   <tr>
-    <td><b>Languages</b></td>
-    <td><img src="https://skillicons.dev/icons?i=ts,js,python,cpp,c,java,rust,cs,php&theme=dark" alt="Languages" /></td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/python-icon.svg" width="58" height="58" alt="Python" /><br />Python
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/ts-icon.svg" width="58" height="58" alt="TypeScript" /><br />TypeScript
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/js-icon.svg" width="58" height="58" alt="JavaScript" /><br />JavaScript
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/cpp-icon.svg" width="58" height="58" alt="C++" /><br />C++
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/java-icon.svg" width="58" height="58" alt="Java" /><br />Java
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/csharp-icon.svg" width="58" height="58" alt="C#" /><br />C#
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/react-icon.svg" width="58" height="58" alt="React" /><br />React
+    </td>
   </tr>
   <tr>
-    <td><b>Frontend</b></td>
-    <td><img src="https://skillicons.dev/icons?i=react,nextjs,vue,tailwind,sass,bootstrap,html,css&theme=dark" alt="Frontend" /></td>
-  </tr>
-  <tr>
-    <td><b>Backend &amp; Data</b></td>
-    <td><img src="https://skillicons.dev/icons?i=nodejs,django,laravel,prisma,postgres,mysql,mongodb,graphql&theme=dark" alt="Backend and data" /></td>
-  </tr>
-  <tr>
-    <td><b>ML &amp; Analysis</b></td>
-    <td><img src="https://skillicons.dev/icons?i=pytorch,tensorflow,sklearn,opencv&theme=dark" alt="Machine learning" /></td>
-  </tr>
-  <tr>
-    <td><b>Tools &amp; Infra</b></td>
-    <td><img src="https://skillicons.dev/icons?i=git,github,docker,linux,aws,vercel,vscode,webpack&theme=dark" alt="Tools and infrastructure" /></td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/django-icon.svg" width="58" height="58" alt="Django" /><br />Django
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/sass-icon.svg" width="58" height="58" alt="Sass" /><br />Sass
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/graphql-icon.svg" width="58" height="58" alt="GraphQL" /><br />GraphQL
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/mysql-icon.svg" width="58" height="58" alt="MySQL" /><br />MySQL
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/webpack-icon.svg" width="58" height="58" alt="Webpack" /><br />Webpack
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/github-icon.svg" width="58" height="58" alt="GitHub" /><br />GitHub
+    </td>
+    <td align="center" width="92">
+      <img src="https://techstack-generator.vercel.app/aws-icon.svg" width="58" height="58" alt="AWS" /><br />AWS
+    </td>
   </tr>
 </table>
+
+<br />
+
+**Also working with**
+
+<img src="https://skillicons.dev/icons?i=rust,c,php,nextjs,nodejs,laravel,vue,tailwind,bootstrap,jquery&theme=dark" alt="Rust, C, PHP, Next.js, Node.js, Laravel, Vue, Tailwind, Bootstrap, jQuery" />
+<br />
+<img src="https://skillicons.dev/icons?i=postgres,mongodb,prisma,sklearn,pytorch,tensorflow,opencv,git,linux,vscode&theme=dark" alt="Postgres, MongoDB, Prisma, scikit-learn, PyTorch, TensorFlow, OpenCV, Git, Linux, VS Code" />
+
+</div>
 
 ---
 
