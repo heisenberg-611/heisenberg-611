@@ -1,12 +1,14 @@
 <div align="center">
 
-# Dhrubojyoti Saha
+<a href="https://github.com/DhrubojyotiSaha">
+  <img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&weight=600&size=42&duration=1&pause=1000000&color=2AA889&center=true&vCenter=true&width=700&height=70&lines=Dhrubojyoti+Saha" alt="Dhrubojyoti Saha" />
+</a>
 
 **Computer Science Undergraduate @ BRAC University**<br />
 Dhaka, Bangladesh
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&duration=3000&pause=1000&color=2AA889&center=true&vCenter=true&width=560&lines=Systems%2C+AI%2C+and+everything+in+between;Building+products+end+to+end;Learning+in+public%2C+one+commit+at+a+time" alt="Systems, AI, and everything in between" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=18&duration=3000&pause=900&color=2AA889&center=true&vCenter=true&width=720&lines=Algorithms+%E2%80%94+trade-offs+over+magic;Systems+%E2%80%94+abstractions+down+to+the+metal;AI+%E2%80%94+learning+patterns+from+data;Distributed+Systems+%E2%80%94+coordination+at+scale;Databases+%E2%80%94+where+data+meets+design;Networks+%E2%80%94+machines+talking+in+protocols;Cybersecurity+%E2%80%94+assume+everything+can+fail;Software+Engineering+%E2%80%94+making+complexity+manageable;Building+products+end+to+end;Learning+in+public%2C+one+commit+at+a+time" alt="Computer Science interests" />
 </a>
 
 <p>
