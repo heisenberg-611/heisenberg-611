@@ -4,11 +4,12 @@
   <img src="https://readme-typing-svg.demolab.com?font=Kalam&weight=400&size=42&duration=1&pause=1000000&color=2AA889&center=true&vCenter=true&width=700&height=70&lines=Dhrubojyoti+Saha" alt="Dhrubojyoti Saha" />
 </a>
 
-**Computer Science Undergraduate @ BRAC University**<br />
-Dhaka, Bangladesh
+<a href="https://github.com/heisenberg-611">
+  <img src="https://readme-typing-svg.demolab.com?font=Kalam&weight=400&size=20&duration=1&pause=1000000&color=2AA889&center=true&vCenter=true&width=700&height=55&lines=Computer+Science+Undergraduate+%40+BRAC+University;Dhaka%2C+Bangladesh" alt="Computer Science Undergraduate @ BRAC University" />
+</a>
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Kalam&weight=400&size=20&duration=3000&pause=900&color=2AA889&center=true&vCenter=true&width=720&lines=Currently+studying+undergrad+at+BRACU;%3CAlways+curious+about+the+things+behind+things%2F%3E;%3CWanna+see+everything+this+universe+has+to+offer%2F%3E;%3CI+love+my+friends+a+lot%2F%3E;%3CI+love+to+live%2C+live+to+love%2F%3E" alt="About me" />
+  <img src="https://readme-typing-svg.demolab.com?font=Kalam&weight=400&size=20&duration=3000&pause=900&color=2AA889&center=true&vCenter=true&width=720&lines=Building+softwares+that+matters;%3CAlways+curious+about+the+things+behind+things%2F%3E;%3CWanna+see+everything+this+universe+has+to+offer%2F%3E;%3CI+love+my+friends+a+lot%2F%3E;%3CI+love+to+live%2C+live+to+love%2F%3E" alt="About me" />
 </a>
 
 <p>
@@ -106,6 +107,7 @@ I'm a CS undergraduate who likes going one layer deeper than the abstraction I'm
 
 | Project | What it is | Stack |
 | :--- | :--- | :--- |
+| **[porcupineResearch](https://github.com/heisenberg-611/porcupine-the-smart-research-manager)** | A literature review, from the first search to the finished evidence table. For teams running a systematic review that has to be reproducible, and for students running a thesis search on the same machinery. | `Next.js` `TypeScript` `Prisma` `Postgres` `Supabase` |
 | **[Cutline OS](https://github.com/heisenberg-611/Cutline_Business_Manager)** | Multi-tenant B2B SaaS for creative agencies — projects, invoicing, client portals, and analytics in one platform | `Next.js` `TypeScript` `Prisma` `Postgres` |
 | **[Rust Text Editor](https://github.com/heisenberg-611/Rust-Text-Editor)** | A minimal terminal-based text editor built from scratch — raw-mode terminal handling, no editor frameworks | `Rust` |
 | **[Meow](https://github.com/heisenberg-611/Meow-A-neko-Text-editor)** | A neko-themed text editor written in C, exploring low-level terminal I/O | `C` |
