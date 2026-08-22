@@ -1,14 +1,14 @@
 <div align="center">
 
 <a href="https://github.com/heisenberg-611">
-  <img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&weight=600&size=42&duration=1&pause=1000000&color=2AA889&center=true&vCenter=true&width=700&height=70&lines=Dhrubojyoti+Saha" alt="Dhrubojyoti Saha" />
+  <img src="https://readme-typing-svg.demolab.com?font=Kalam&weight=400&size=42&duration=1&pause=1000000&color=2AA889&center=true&vCenter=true&width=700&height=70&lines=Dhrubojyoti+Saha" alt="Dhrubojyoti Saha" />
 </a>
 
 **Computer Science Undergraduate @ BRAC University**<br />
 Dhaka, Bangladesh
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=18&duration=3000&pause=900&color=2AA889&center=true&vCenter=true&width=720&lines=Algorithms+%E2%80%94+trade-offs+over+magic;Systems+%E2%80%94+abstractions+down+to+the+metal;AI+%E2%80%94+learning+patterns+from+data;Distributed+Systems+%E2%80%94+coordination+at+scale;Databases+%E2%80%94+where+data+meets+design;Networks+%E2%80%94+machines+talking+in+protocols;Cybersecurity+%E2%80%94+assume+everything+can+fail;Software+Engineering+%E2%80%94+making+complexity+manageable;Building+products+end+to+end;Learning+in+public%2C+one+commit+at+a+time" alt="Computer Science interests" />
+  <img src="https://readme-typing-svg.demolab.com?font=Kalam&weight=400&size=20&duration=3000&pause=900&color=2AA889&center=true&vCenter=true&width=720&lines=Currently+studying+undergrad+at+BRACU;%3CAlways+curious+about+the+things+behind+things%2F%3E;%3CWanna+see+everything+this+universe+has+to+offer%2F%3E;%3CI+love+my+friends+a+lot%2F%3E;%3CI+love+to+live%2C+live+to+love%2F%3E" alt="About me" />
 </a>
 
 <p>
@@ -17,7 +17,9 @@ Dhaka, Bangladesh
   <a href="mailto:dhrubojyoti.saha@g.bracu.ac.bd"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
   <a href="https://x.com/Dhruboj52821394"><img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X" /></a>
   <a href="https://github.com/heisenberg-611?tab=followers"><img src="https://custom-icon-badges.herokuapp.com/github/followers/heisenberg-611?color=236ad3&labelColor=1155ba&style=for-the-badge&logo=person-add&label=Follow&logoColor=white" alt="Followers" /></a>
-  <a href="https://github.com/heisenberg-611?tab=repositories&sort=stargazers"><img src="https://custom-icon-badges.herokuapp.com/badge/dynamic/json?logo=star&color=55960c&labelColor=488207&label=Stars&style=for-the-badge&query=%24.stars&url=https%3A%2F%2Fapi.github-star-counter.workers.dev%2Fuser%2Fheisenberg-611" alt="Stars" /></a>
+  <a href="https://github.com/heisenberg-611?tab=repositories&sort=stargazers">
+  <img src="https://img.shields.io/badge/dynamic/json?logo=github&logoColor=white&color=55960c&labelColor=488207&label=Stars&style=for-the-badge&query=%24.stars&url=https%3A%2F%2Fapi.github-star-counter.workers.dev%2Fuser%2Fheisenberg-611" alt="Stars" />
+</a>
 </p>
 
 </div>
