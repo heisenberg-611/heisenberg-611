@@ -411,8 +411,8 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
         pass
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'age_data', age_data, 22)
-    justify_format(root, 'commit_data', commit_data, 20)
+    justify_format(root, 'age_data', age_data, 42)
+    justify_format(root, 'commit_data', commit_data, 21)
     justify_format(root, 'star_data', star_data, 12)
     justify_format(root, 'repo_data', repo_data, 6)
     justify_format(root, 'contrib_data', contrib_data)
