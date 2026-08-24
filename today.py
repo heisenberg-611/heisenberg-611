@@ -66,19 +66,33 @@ def format_plural(unit):
 SESSION = requests.Session() if requests else None
 
 
-def simple_request(func_name, query, variables):
+def simple_request(func_name, query, variables, retries=2):
     """
     Returns a request, or raises an Exception if the response does not succeed.
     """
     if not ACCESS_TOKEN:
         raise ValueError("ACCESS_TOKEN environment variable is missing.")
     client = SESSION if SESSION is not None else requests
-    request = client.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS)
-    if request.status_code == 200:
-        res_json = request.json()
-        if 'errors' in res_json:
-            raise Exception(func_name, 'returned GraphQL errors:', res_json['errors'])
-        return request
+
+    for attempt in range(retries + 1):
+        try:
+            request = client.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS, timeout=30)
+        except Exception as e:
+            if attempt < retries:
+                time.sleep(2 * (attempt + 1))
+                continue
+            raise e
+
+        if request.status_code == 200:
+            res_json = request.json()
+            if 'errors' in res_json:
+                raise Exception(func_name, 'returned GraphQL errors:', res_json['errors'])
+            return request
+        elif request.status_code in (403, 429, 502, 503) and attempt < retries:
+            time.sleep(2 * (attempt + 1))
+            continue
+        break
+
     raise Exception(func_name, 'has failed with status code', request.status_code, request.text, QUERY_COUNT)
 
 
@@ -141,8 +155,9 @@ def graph_repos_stars(count_type, owner_affiliation):
             total_stars += stars_counter(user_data.get('edges', []))
 
         page_info = user_data.get('pageInfo', {})
-        if page_info.get('hasNextPage'):
-            cursor = page_info.get('endCursor')
+        new_cursor = page_info.get('endCursor')
+        if page_info.get('hasNextPage') and new_cursor and new_cursor != cursor:
+            cursor = new_cursor
         else:
             break
 
@@ -152,26 +167,18 @@ def graph_repos_stars(count_type, owner_affiliation):
 def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, deletion_total=0, my_commits=0, cursor=None):
     """
     Uses GitHub's GraphQL v4 API and cursor pagination to fetch 100 commits from a repository at a time iteratively,
-    avoiding call stack overflow / RecursionError on repositories with large commit histories.
+    filtering by author ID directly on GitHub to avoid fetching unrelated commits from organizations/collaborators.
     """
     query = '''
-    query ($repo_name: String!, $owner: String!, $cursor: String) {
+    query ($repo_name: String!, $owner: String!, $cursor: String, $author_id: ID!) {
         repository(name: $repo_name, owner: $owner) {
             defaultBranchRef {
                 target {
                     ... on Commit {
-                        history(first: 100, after: $cursor) {
+                        history(first: 100, after: $cursor, author: { id: $author_id }) {
                             totalCount
                             edges {
                                 node {
-                                    ... on Commit {
-                                        committedDate
-                                    }
-                                    author {
-                                        user {
-                                            id
-                                        }
-                                    }
                                     deletions
                                     additions
                                 }
@@ -188,39 +195,47 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
     }'''
 
     client = SESSION if SESSION is not None else requests
+    author_id = OWNER_ID.get('id') if isinstance(OWNER_ID, dict) else OWNER_ID
     while True:
         query_count('recursive_loc')
-        variables = {'repo_name': repo_name, 'owner': owner, 'cursor': cursor}
+        variables = {'repo_name': repo_name, 'owner': owner, 'cursor': cursor, 'author_id': author_id}
         try:
-            request = client.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS)
+            request = client.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS, timeout=30)
         except Exception:
             force_close_file(data, cache_comment)
             raise
 
         if request.status_code == 200:
-            res_data = request.json().get('data', {})
-            repo_data = res_data.get('repository')
-            if not repo_data or repo_data.get('defaultBranchRef') is None:
+            res_json = request.json()
+            if 'errors' in res_json:
                 return addition_total, deletion_total, my_commits
 
-            history = repo_data['defaultBranchRef']['target']['history']
+            res_data = res_json.get('data', {})
+            repo_data = res_data.get('repository')
+            if not repo_data or not repo_data.get('defaultBranchRef') or not repo_data['defaultBranchRef'].get('target'):
+                return addition_total, deletion_total, my_commits
+
+            history = repo_data['defaultBranchRef']['target'].get('history')
+            if not history:
+                return addition_total, deletion_total, my_commits
+
             edges = history.get('edges', [])
             for node in edges:
                 commit_node = node.get('node', {})
-                author_user = commit_node.get('author', {}).get('user')
-                if author_user and OWNER_ID and author_user.get('id') == OWNER_ID.get('id'):
-                    my_commits += 1
-                    addition_total += commit_node.get('additions', 0)
-                    deletion_total += commit_node.get('deletions', 0)
+                my_commits += 1
+                addition_total += commit_node.get('additions', 0)
+                deletion_total += commit_node.get('deletions', 0)
 
             page_info = history.get('pageInfo', {})
-            if not edges or not page_info.get('hasNextPage'):
+            new_cursor = page_info.get('endCursor')
+            if not edges or not page_info.get('hasNextPage') or not new_cursor or new_cursor == cursor:
                 return addition_total, deletion_total, my_commits
-            cursor = page_info.get('endCursor')
+            cursor = new_cursor
+        elif request.status_code in (403, 429):
+            time.sleep(3)
+            continue
         else:
             force_close_file(data, cache_comment)
-            if request.status_code == 403:
-                raise Exception('Too many requests in a short amount of time (API rate limit).')
             raise Exception('recursive_loc() failed with', request.status_code, request.text, QUERY_COUNT)
 
 
@@ -266,8 +281,9 @@ def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None,
         repos_data = request.json()['data']['user']['repositories']
         edges.extend(repos_data.get('edges', []))
         page_info = repos_data.get('pageInfo', {})
-        if page_info.get('hasNextPage'):
-            cursor = page_info.get('endCursor')
+        new_cursor = page_info.get('endCursor')
+        if page_info.get('hasNextPage') and new_cursor and new_cursor != cursor:
+            cursor = new_cursor
         else:
             break
 
@@ -306,13 +322,15 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
         parts = data[index].split()
         repo_hash = parts[0]
         commit_count = parts[1] if len(parts) > 1 else '0'
-        if repo_hash == hashlib.sha256(edges[index]['node']['nameWithOwner'].encode('utf-8')).hexdigest():
+        repo_name_with_owner = edges[index]['node']['nameWithOwner']
+        if repo_hash == hashlib.sha256(repo_name_with_owner.encode('utf-8')).hexdigest():
             try:
                 target_branch = edges[index]['node'].get('defaultBranchRef')
-                if target_branch and target_branch.get('target'):
+                if target_branch and target_branch.get('target') and target_branch['target'].get('history'):
                     current_count = target_branch['target']['history']['totalCount']
                     if int(commit_count) != current_count:
-                        owner, repo_name = edges[index]['node']['nameWithOwner'].split('/')
+                        print(f"   Updating LOC [{index+1}/{len(edges)}]: {repo_name_with_owner} ({current_count} commits)")
+                        owner, repo_name = repo_name_with_owner.split('/')
                         loc = recursive_loc(owner, repo_name, data, cache_comment)
                         data[index] = f"{repo_hash} {current_count} {loc[2]} {loc[0]} {loc[1]}\n"
                 else:
