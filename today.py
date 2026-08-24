@@ -18,6 +18,9 @@ import time
 import hashlib
 import sys
 
+# Increase recursion limit as a fallback precaution
+sys.setrecursionlimit(5000)
+
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
@@ -60,13 +63,17 @@ def format_plural(unit):
     return 's' if unit != 1 else ''
 
 
+SESSION = requests.Session() if requests else None
+
+
 def simple_request(func_name, query, variables):
     """
     Returns a request, or raises an Exception if the response does not succeed.
     """
     if not ACCESS_TOKEN:
         raise ValueError("ACCESS_TOKEN environment variable is missing.")
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS)
+    client = SESSION if SESSION is not None else requests
+    request = client.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS)
     if request.status_code == 200:
         res_json = request.json()
         if 'errors' in res_json:
@@ -95,11 +102,10 @@ def graph_commits(start_date, end_date):
     return int(request.json()['data']['user']['contributionsCollection']['contributionCalendar']['totalContributions'])
 
 
-def graph_repos_stars(count_type, owner_affiliation, cursor=None):
+def graph_repos_stars(count_type, owner_affiliation):
     """
-    Uses GitHub's GraphQL v4 API to return total repository count or star count.
+    Uses GitHub's GraphQL v4 API to return total repository count or star count across all pages.
     """
-    query_count('graph_repos_stars')
     query = '''
     query ($owner_affiliation: [RepositoryAffiliation], $login: String!, $cursor: String) {
         user(login: $login) {
@@ -122,20 +128,32 @@ def graph_repos_stars(count_type, owner_affiliation, cursor=None):
             }
         }
     }'''
-    variables = {'owner_affiliation': owner_affiliation, 'login': USER_NAME, 'cursor': cursor}
-    request = simple_request(graph_repos_stars.__name__, query, variables)
-    if request.status_code == 200:
+    cursor = None
+    total_stars = 0
+    while True:
+        query_count('graph_repos_stars')
+        variables = {'owner_affiliation': owner_affiliation, 'login': USER_NAME, 'cursor': cursor}
+        request = simple_request(graph_repos_stars.__name__, query, variables)
+        user_data = request.json()['data']['user']['repositories']
         if count_type == 'repos':
-            return request.json()['data']['user']['repositories']['totalCount']
+            return user_data['totalCount']
         elif count_type == 'stars':
-            return stars_counter(request.json()['data']['user']['repositories']['edges'])
+            total_stars += stars_counter(user_data.get('edges', []))
+
+        page_info = user_data.get('pageInfo', {})
+        if page_info.get('hasNextPage'):
+            cursor = page_info.get('endCursor')
+        else:
+            break
+
+    return total_stars
 
 
 def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, deletion_total=0, my_commits=0, cursor=None):
     """
-    Uses GitHub's GraphQL v4 API and cursor pagination to fetch 100 commits from a repository at a time
+    Uses GitHub's GraphQL v4 API and cursor pagination to fetch 100 commits from a repository at a time iteratively,
+    avoiding call stack overflow / RecursionError on repositories with large commit histories.
     """
-    query_count('recursive_loc')
     query = '''
     query ($repo_name: String!, $owner: String!, $cursor: String) {
         repository(name: $repo_name, owner: $owner) {
@@ -168,44 +186,51 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
             }
         }
     }'''
-    variables = {'repo_name': repo_name, 'owner': owner, 'cursor': cursor}
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS)
-    if request.status_code == 200:
-        res_data = request.json().get('data', {})
-        repo_data = res_data.get('repository')
-        if repo_data and repo_data.get('defaultBranchRef') is not None:
-            return loc_counter_one_repo(owner, repo_name, data, cache_comment, repo_data['defaultBranchRef']['target']['history'], addition_total, deletion_total, my_commits)
+
+    client = SESSION if SESSION is not None else requests
+    while True:
+        query_count('recursive_loc')
+        variables = {'repo_name': repo_name, 'owner': owner, 'cursor': cursor}
+        try:
+            request = client.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS)
+        except Exception:
+            force_close_file(data, cache_comment)
+            raise
+
+        if request.status_code == 200:
+            res_data = request.json().get('data', {})
+            repo_data = res_data.get('repository')
+            if not repo_data or repo_data.get('defaultBranchRef') is None:
+                return addition_total, deletion_total, my_commits
+
+            history = repo_data['defaultBranchRef']['target']['history']
+            edges = history.get('edges', [])
+            for node in edges:
+                commit_node = node.get('node', {})
+                author_user = commit_node.get('author', {}).get('user')
+                if author_user and OWNER_ID and author_user.get('id') == OWNER_ID.get('id'):
+                    my_commits += 1
+                    addition_total += commit_node.get('additions', 0)
+                    deletion_total += commit_node.get('deletions', 0)
+
+            page_info = history.get('pageInfo', {})
+            if not edges or not page_info.get('hasNextPage'):
+                return addition_total, deletion_total, my_commits
+            cursor = page_info.get('endCursor')
         else:
-            return 0, 0, 0
-    force_close_file(data, cache_comment)
-    if request.status_code == 403:
-        raise Exception('Too many requests in a short amount of time (API rate limit).')
-    raise Exception('recursive_loc() failed with', request.status_code, request.text, QUERY_COUNT)
+            force_close_file(data, cache_comment)
+            if request.status_code == 403:
+                raise Exception('Too many requests in a short amount of time (API rate limit).')
+            raise Exception('recursive_loc() failed with', request.status_code, request.text, QUERY_COUNT)
 
 
-def loc_counter_one_repo(owner, repo_name, data, cache_comment, history, addition_total, deletion_total, my_commits):
+def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None, edges=None):
     """
-    Count additions, deletions, and commits authored by user
+    Queries all repositories accessible to the user iteratively.
     """
-    for node in history.get('edges', []):
-        commit_node = node.get('node', {})
-        author_user = commit_node.get('author', {}).get('user')
-        if author_user and author_user.get('id') == OWNER_ID.get('id'):
-            my_commits += 1
-            addition_total += commit_node.get('additions', 0)
-            deletion_total += commit_node.get('deletions', 0)
+    if edges is None:
+        edges = []
 
-    if not history.get('edges') or not history.get('pageInfo', {}).get('hasNextPage'):
-        return addition_total, deletion_total, my_commits
-    else:
-        return recursive_loc(owner, repo_name, data, cache_comment, addition_total, deletion_total, my_commits, history['pageInfo']['endCursor'])
-
-
-def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None, edges=[]):
-    """
-    Queries all repositories accessible to the user
-    """
-    query_count('loc_query')
     query = '''
     query ($owner_affiliation: [RepositoryAffiliation], $login: String!, $cursor: String) {
         user(login: $login) {
@@ -233,14 +258,20 @@ def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None,
             }
         }
     }'''
-    variables = {'owner_affiliation': owner_affiliation, 'login': USER_NAME, 'cursor': cursor}
-    request = simple_request(loc_query.__name__, query, variables)
-    repos_data = request.json()['data']['user']['repositories']
-    if repos_data['pageInfo']['hasNextPage']:
-        edges += repos_data['edges']
-        return loc_query(owner_affiliation, comment_size, force_cache, repos_data['pageInfo']['endCursor'], edges)
-    else:
-        return cache_builder(edges + repos_data['edges'], comment_size, force_cache)
+
+    while True:
+        query_count('loc_query')
+        variables = {'owner_affiliation': owner_affiliation, 'login': USER_NAME, 'cursor': cursor}
+        request = simple_request(loc_query.__name__, query, variables)
+        repos_data = request.json()['data']['user']['repositories']
+        edges.extend(repos_data.get('edges', []))
+        page_info = repos_data.get('pageInfo', {})
+        if page_info.get('hasNextPage'):
+            cursor = page_info.get('endCursor')
+        else:
+            break
+
+    return cache_builder(edges, comment_size, force_cache)
 
 
 def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
