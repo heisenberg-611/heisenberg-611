@@ -196,18 +196,26 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
 
     client = SESSION if SESSION is not None else requests
     author_id = OWNER_ID.get('id') if isinstance(OWNER_ID, dict) else OWNER_ID
+    retries_left = 3
+
     while True:
         query_count('recursive_loc')
         variables = {'repo_name': repo_name, 'owner': owner, 'cursor': cursor, 'author_id': author_id}
         try:
             request = client.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS, timeout=30)
-        except Exception:
-            force_close_file(data, cache_comment)
-            raise
+        except Exception as e:
+            if retries_left > 0:
+                retries_left -= 1
+                time.sleep(3)
+                continue
+            print(f"Warning: Network error for {owner}/{repo_name}: {e}. Skipping remainder.")
+            return addition_total, deletion_total, my_commits
 
         if request.status_code == 200:
+            retries_left = 3  # reset retries on success
             res_json = request.json()
             if 'errors' in res_json:
+                print(f"Warning: GraphQL error in {owner}/{repo_name}: {res_json['errors']}")
                 return addition_total, deletion_total, my_commits
 
             res_data = res_json.get('data', {})
@@ -231,12 +239,16 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
             if not edges or not page_info.get('hasNextPage') or not new_cursor or new_cursor == cursor:
                 return addition_total, deletion_total, my_commits
             cursor = new_cursor
-        elif request.status_code in (403, 429):
-            time.sleep(3)
-            continue
+        elif request.status_code in (403, 429, 502, 503):
+            if retries_left > 0:
+                retries_left -= 1
+                time.sleep(3 * (4 - retries_left))
+                continue
+            print(f"Warning: GitHub API returned status {request.status_code} for {owner}/{repo_name}. Skipping remainder.")
+            return addition_total, deletion_total, my_commits
         else:
-            force_close_file(data, cache_comment)
-            raise Exception('recursive_loc() failed with', request.status_code, request.text, QUERY_COUNT)
+            print(f"Warning: Unexpected status {request.status_code} for {owner}/{repo_name}. Skipping remainder.")
+            return addition_total, deletion_total, my_commits
 
 
 def loc_query(owner_affiliation, comment_size=0, force_cache=False, cursor=None, edges=None):
