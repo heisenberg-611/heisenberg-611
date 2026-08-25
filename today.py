@@ -157,6 +157,40 @@ def graph_commits(start_date, end_date):
     return int(request.json()['data']['user']['contributionsCollection']['contributionCalendar']['totalContributions'])
 
 
+def rest_repo_stars(username):
+    """
+    REST fallback for star counts. Fine-grained PATs currently have a known
+    gap where the GraphQL `stargazers` field returns a FORBIDDEN error even
+    with Metadata read access granted. The equivalent REST endpoint
+    (GET /users/{username}/repos) works fine under the same token, so we use
+    that instead for this one value.
+    """
+    if not requests:
+        return 0
+    client = SESSION if SESSION is not None else requests
+    total_stars = 0
+    page = 1
+    while True:
+        resp = client.get(
+            f'https://api.github.com/users/{username}/repos',
+            headers=HEADERS,
+            params={'type': 'owner', 'per_page': 100, 'page': page},
+            timeout=30,
+        )
+        if resp.status_code != 200:
+            print(f"Warning: REST stars fallback failed with status {resp.status_code}: {resp.text[:200]}")
+            break
+        repos = resp.json()
+        if not repos:
+            break
+        total_stars += sum(r.get('stargazers_count', 0) for r in repos)
+        if len(repos) < 100:
+            break
+        page += 1
+        time.sleep(REQUEST_DELAY)
+    return total_stars
+
+
 def graph_repos_stars(count_type, owner_affiliation):
     """
     Uses GitHub's GraphQL v4 API to return total repository count or star count across all pages.
@@ -467,7 +501,12 @@ def force_close_file(data, cache_comment):
 def stars_counter(data):
     total_stars = 0
     for node in data:
-        stargazers = node['node'].get('stargazers', {})
+        node_data = node.get('node')
+        if not node_data:
+            # GitHub can return a null node when a nested field (e.g.
+            # stargazers) hit a FORBIDDEN error for that repo.
+            continue
+        stargazers = node_data.get('stargazers') or {}
         total_stars += stargazers.get('totalCount', 0)
     return total_stars
 
@@ -525,7 +564,14 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
         pass
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'age_data', age_data, 42)
+    # age_data intentionally does NOT use justify_format here. The dot-leader
+    # for this row is now a fixed length, hand-aligned so its value starts at
+    # the same column as every other row in the panel. justify_format would
+    # instead resize the dots based on the value's length each run (right-
+    # justifying the END of the text), which drifts the START out of
+    # alignment with the rest of the panel every time the day-count's digit
+    # count changes. Only the value text itself needs updating.
+    find_and_replace(root, 'age_data', age_data)
     justify_format(root, 'commit_data', commit_data, 21)
     justify_format(root, 'star_data', star_data, 12)
     justify_format(root, 'repo_data', repo_data, 6)
@@ -625,7 +671,7 @@ if __name__ == '__main__':
         # of these (rate limit, network blip) should not prevent the SVGs
         # from being updated with everything we DO have.
         commit_data, commit_time = safe_perf_counter(commit_counter, 0, 7, label='commit_counter')
-        star_data, star_time = safe_perf_counter(graph_repos_stars, 0, 'stars', ['OWNER'], label='graph_repos_stars(stars)')
+        star_data, star_time = safe_perf_counter(rest_repo_stars, 0, USER_NAME, label='rest_repo_stars')
         repo_data, repo_time = safe_perf_counter(graph_repos_stars, 0, 'repos', ['OWNER'], label='graph_repos_stars(repos)')
         contrib_data, contrib_time = safe_perf_counter(graph_repos_stars, 0, 'repos', ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], label='graph_repos_stars(contrib)')
         follower_data, follower_time = safe_perf_counter(follower_getter, 0, USER_NAME, label='follower_getter')
