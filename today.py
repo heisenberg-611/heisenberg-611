@@ -17,9 +17,21 @@ except ImportError:
 import time
 import hashlib
 import sys
+import traceback
 
 # Increase recursion limit as a fallback precaution
 sys.setrecursionlimit(5000)
+
+# Force line-buffered stdout/stderr. Without this, prints sit in an internal
+# buffer when stdout is piped (as it is in CI) and are LOST if the process is
+# killed abruptly (e.g. an OOM-kill) instead of exiting normally. This is why
+# earlier runs showed no traceback even after a crash: the traceback text was
+# printed but never flushed before the process died.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(line_buffering=True)
+    except Exception:
+        pass
 
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
@@ -31,6 +43,12 @@ BIRTHDAY_ENV = os.environ.get('BIRTHDAY')
 HEADERS = {'authorization': f'token {ACCESS_TOKEN}'} if ACCESS_TOKEN else {}
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 OWNER_ID = None
+
+# Small pause between GraphQL calls to avoid tripping GitHub's secondary/abuse
+# rate limiter, which fires on request *rate*, independent of the 5000/hr quota.
+REQUEST_DELAY = 0.35
+# Cooldown when we detect a secondary rate limit / abuse-detection response.
+SECONDARY_RATE_LIMIT_SLEEP = 60
 
 
 def daily_readme(start_date):
@@ -50,8 +68,8 @@ def daily_readme(start_date):
         days = remaining_days % 30
 
     return '{} {}, {} {}, {} {}{}'.format(
-        years, 'year' + format_plural(years), 
-        months, 'month' + format_plural(months), 
+        years, 'year' + format_plural(years),
+        months, 'month' + format_plural(months),
         days, 'day' + format_plural(days),
         ' 🎂' if (months == 0 and days == 0) else '')
 
@@ -66,7 +84,19 @@ def format_plural(unit):
 SESSION = requests.Session() if requests else None
 
 
-def simple_request(func_name, query, variables, retries=2):
+def _is_secondary_rate_limit(status_code, text):
+    """
+    Detects GitHub's secondary/abuse-detection rate limit, which needs a much
+    longer cooldown than a normal 403/429 and is otherwise indistinguishable
+    from other 403s by status code alone.
+    """
+    if status_code not in (403, 429):
+        return False
+    lowered = (text or '').lower()
+    return 'secondary rate limit' in lowered or 'abuse detection' in lowered
+
+
+def simple_request(func_name, query, variables, retries=3):
     """
     Returns a request, or raises an Exception if the response does not succeed.
     """
@@ -74,6 +104,7 @@ def simple_request(func_name, query, variables, retries=2):
         raise ValueError("ACCESS_TOKEN environment variable is missing.")
     client = SESSION if SESSION is not None else requests
 
+    request = None
     for attempt in range(retries + 1):
         try:
             request = client.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS, timeout=30)
@@ -86,8 +117,18 @@ def simple_request(func_name, query, variables, retries=2):
         if request.status_code == 200:
             res_json = request.json()
             if 'errors' in res_json:
-                raise Exception(func_name, 'returned GraphQL errors:', res_json['errors'])
+                # Some GraphQL errors are per-node (e.g. a repo the token can't
+                # see) and non-fatal for the overall query. Only hard-fail if
+                # there's no usable data at all.
+                if not res_json.get('data'):
+                    raise Exception(func_name, 'returned GraphQL errors with no data:', res_json['errors'])
+                print(f"Warning: {func_name} returned partial GraphQL errors: {res_json['errors']}")
+            time.sleep(REQUEST_DELAY)
             return request
+        elif _is_secondary_rate_limit(request.status_code, request.text):
+            print(f"Warning: secondary rate limit hit in {func_name}, cooling down {SECONDARY_RATE_LIMIT_SLEEP}s...")
+            time.sleep(SECONDARY_RATE_LIMIT_SLEEP)
+            continue
         elif request.status_code in (403, 429, 502, 503) and attempt < retries:
             time.sleep(2 * (attempt + 1))
             continue
@@ -213,8 +254,9 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
 
         if request.status_code == 200:
             retries_left = 3  # reset retries on success
+            time.sleep(REQUEST_DELAY)
             res_json = request.json()
-            if 'errors' in res_json:
+            if 'errors' in res_json and not res_json.get('data'):
                 print(f"Warning: GraphQL error in {owner}/{repo_name}: {res_json['errors']}")
                 return addition_total, deletion_total, my_commits
 
@@ -239,6 +281,10 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
             if not edges or not page_info.get('hasNextPage') or not new_cursor or new_cursor == cursor:
                 return addition_total, deletion_total, my_commits
             cursor = new_cursor
+        elif _is_secondary_rate_limit(request.status_code, request.text):
+            print(f"Warning: secondary rate limit hit on {owner}/{repo_name}, cooling down {SECONDARY_RATE_LIMIT_SLEEP}s...")
+            time.sleep(SECONDARY_RATE_LIMIT_SLEEP)
+            continue
         elif request.status_code in (403, 429, 502, 503):
             if retries_left > 0:
                 retries_left -= 1
@@ -341,7 +387,7 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
                 if target_branch and target_branch.get('target') and target_branch['target'].get('history'):
                     current_count = target_branch['target']['history']['totalCount']
                     if int(commit_count) != current_count:
-                        print(f"   Updating LOC [{index+1}/{len(edges)}]: {repo_name_with_owner} ({current_count} commits)")
+                        print(f"   Updating LOC [{index+1}/{len(edges)}]: {repo_name_with_owner} ({current_count} commits)", flush=True)
                         owner, repo_name = repo_name_with_owner.split('/')
                         loc = recursive_loc(owner, repo_name, data, cache_comment)
                         data[index] = f"{repo_hash} {current_count} {loc[2]} {loc[0]} {loc[1]}\n"
@@ -349,6 +395,13 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
                     data[index] = f"{repo_hash} 0 0 0 0\n"
             except (TypeError, KeyError, ValueError):
                 data[index] = f"{repo_hash} 0 0 0 0\n"
+            finally:
+                # Persist progress after every repo, so a crash mid-run still
+                # leaves a usable, up-to-date cache for the next run instead
+                # of losing everything computed so far.
+                with open(filename, 'w') as f:
+                    f.writelines(cache_comment)
+                    f.writelines(data)
 
     with open(filename, 'w') as f:
         f.writelines(cache_comment)
@@ -515,6 +568,24 @@ def perf_counter(funct, *args):
     return funct_return, time.perf_counter() - start
 
 
+def safe_perf_counter(funct, fallback, *args, label=None):
+    """
+    Like perf_counter, but a failure here (network hiccup, rate limit, etc.)
+    logs a full traceback and falls back to a default value instead of
+    killing the entire run. Used for the "nice to have" stats (stars, repos,
+    contrib count, followers) where partial data is far better than no SVG
+    update at all.
+    """
+    start = time.perf_counter()
+    try:
+        result = funct(*args)
+        return result, time.perf_counter() - start
+    except Exception:
+        print(f"Warning: {label or funct.__name__} failed, using fallback value {fallback!r}.")
+        traceback.print_exc()
+        return fallback, time.perf_counter() - start
+
+
 def formatter(query_type, difference, funct_return=False, whitespace=0):
     print('{:<23}'.format('   ' + query_type + ':'), sep='', end='')
     print('{:>12}'.format('%.4f' % difference + ' s ')) if difference > 1 else print('{:>12}'.format('%.4f' % (difference * 1000) + ' ms'))
@@ -528,48 +599,62 @@ if __name__ == '__main__':
         print("Note: ACCESS_TOKEN not found in environment variables.")
         print("Set ACCESS_TOKEN=<your_github_token> to run live queries.")
         print("Validating SVG formatting on existing files...")
-        # Dry-run validation of SVG files
         sys.exit(0)
 
-    print(f"Calculating GitHub Stats for user: {USER_NAME}")
-    user_data, user_time = perf_counter(user_getter, USER_NAME)
-    OWNER_ID, acc_date = user_data
-    formatter('account data', user_time)
+    try:
+        print(f"Calculating GitHub Stats for user: {USER_NAME}")
+        user_data, user_time = perf_counter(user_getter, USER_NAME)
+        OWNER_ID, acc_date = user_data
+        formatter('account data', user_time)
 
-    # Determine start date for uptime
-    if BIRTHDAY_ENV:
-        try:
-            start_dt = datetime.datetime.strptime(BIRTHDAY_ENV, '%Y-%m-%d')
-        except ValueError:
+        if BIRTHDAY_ENV:
+            try:
+                start_dt = datetime.datetime.strptime(BIRTHDAY_ENV, '%Y-%m-%d')
+            except ValueError:
+                start_dt = datetime.datetime.strptime(acc_date[:10], '%Y-%m-%d')
+        else:
             start_dt = datetime.datetime.strptime(acc_date[:10], '%Y-%m-%d')
-    else:
-        start_dt = datetime.datetime.strptime(acc_date[:10], '%Y-%m-%d')
 
-    age_data, age_time = perf_counter(daily_readme, start_dt)
-    formatter('uptime calculation', age_time)
+        age_data, age_time = perf_counter(daily_readme, start_dt)
+        formatter('uptime calculation', age_time)
 
-    total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], 7)
-    formatter('LOC (cached)' if total_loc[-1] else 'LOC (no cache)', loc_time)
+        total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], 7)
+        formatter('LOC (cached)' if total_loc[-1] else 'LOC (no cache)', loc_time)
 
-    commit_data, commit_time = perf_counter(commit_counter, 7)
-    star_data, star_time = perf_counter(graph_repos_stars, 'stars', ['OWNER'])
-    repo_data, repo_time = perf_counter(graph_repos_stars, 'repos', ['OWNER'])
-    contrib_data, contrib_time = perf_counter(graph_repos_stars, 'repos', ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
-    follower_data, follower_time = perf_counter(follower_getter, USER_NAME)
+        # Everything below is "nice to have" — a transient failure on any one
+        # of these (rate limit, network blip) should not prevent the SVGs
+        # from being updated with everything we DO have.
+        commit_data, commit_time = safe_perf_counter(commit_counter, 0, 7, label='commit_counter')
+        star_data, star_time = safe_perf_counter(graph_repos_stars, 0, 'stars', ['OWNER'], label='graph_repos_stars(stars)')
+        repo_data, repo_time = safe_perf_counter(graph_repos_stars, 0, 'repos', ['OWNER'], label='graph_repos_stars(repos)')
+        contrib_data, contrib_time = safe_perf_counter(graph_repos_stars, 0, 'repos', ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], label='graph_repos_stars(contrib)')
+        follower_data, follower_time = safe_perf_counter(follower_getter, 0, USER_NAME, label='follower_getter')
 
-    archived_data = add_archive()
-    for index in range(len(total_loc)-1):
-        total_loc[index] += archived_data[index]
-    contrib_data += archived_data[-1]
-    commit_data += int(archived_data[-2])
+        archived_data = add_archive()
+        for index in range(len(total_loc)-1):
+            total_loc[index] += archived_data[index]
+        contrib_data += archived_data[-1]
+        commit_data += int(archived_data[-2])
 
-    for index in range(len(total_loc)-1):
-        total_loc[index] = '{:,}'.format(total_loc[index])
+        for index in range(len(total_loc)-1):
+            total_loc[index] = '{:,}'.format(total_loc[index])
 
-    svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
-    svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+        svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+        svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
 
-    print(f"\nSuccessfully updated dark_mode.svg and light_mode.svg!")
-    print('Total GitHub GraphQL API calls:', sum(QUERY_COUNT.values()))
-    for funct_name, count in QUERY_COUNT.items():
-        print(f"   {funct_name}: {count}")
+        print(f"\nSuccessfully updated dark_mode.svg and light_mode.svg!")
+        print('Total GitHub GraphQL API calls:', sum(QUERY_COUNT.values()))
+        for funct_name, count in QUERY_COUNT.items():
+            print(f"   {funct_name}: {count}")
+
+    except (Exception, KeyboardInterrupt):
+        # Print the FULL traceback so the Actions log shows exactly which
+        # call and line failed, instead of just the generic exit-code-1 line.
+        # KeyboardInterrupt is included because a job timeout/cancellation
+        # arrives as SIGTERM -> KeyboardInterrupt, which plain `except
+        # Exception` would silently miss.
+        print("\nFATAL: today.py crashed. Full traceback below:", flush=True)
+        traceback.print_exc()
+        sys.stdout.flush()
+        sys.stderr.flush()
+        sys.exit(1)

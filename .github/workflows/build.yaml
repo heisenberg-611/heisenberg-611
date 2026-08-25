@@ -39,7 +39,8 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           USER_NAME: ${{ secrets.USER_NAME || 'heisenberg-611' }}
-        run: python today.py
+          PYTHONUNBUFFERED: "1"
+        run: python -u today.py
 
       - name: Commit and push updated SVGs
         run: |-
