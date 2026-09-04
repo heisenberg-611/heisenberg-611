@@ -118,7 +118,8 @@ I'm a CS undergraduate who likes going one layer deeper than the abstraction I'm
 | Project | What it is | Stack |
 | :--- | :--- | :--- |
 | **[porcupineResearch](https://github.com/heisenberg-611/porcupine-the-smart-research-manager)** | A literature review, from the first search to the finished evidence table. For teams running a systematic review that has to be reproducible, and for students running a thesis search on the same machinery. | `Next.js` `TypeScript` `Prisma` `Postgres` `Supabase` |
-| **[Cutline OS](https://github.com/heisenberg-611/Cutline_Business_Manager)** | Multi-tenant B2B SaaS for creative agencies — projects, invoicing, client portals, and analytics in one platform | `Next.js` `TypeScript` `Prisma` `Postgres` |
+| **[Teleporter](https://teleporter611.vercel.app/)** | Drop any document — beam an authentic claim ticket back. Markdown with real KaTeX math, LaTeX formulas, code syntax highlighting, CSV tables, PDFs and media rendered inline without sign-in walls. | `Next.js` `TypeScript` `Postgress` `Neon` |
+| **[Cutline OS](https://github.com/heisenberg-611/Cutline_Business_Manager)** | Multi-tenant B2B SaaS for creative agencies — projects, invoicing, client portals, and analytics in one platform | `Next.js` `TypeScript` `Prisma` `Postgres` `Supabase`|
 | **[Rust Text Editor](https://github.com/heisenberg-611/Rust-Text-Editor)** | A minimal terminal-based text editor built from scratch — raw-mode terminal handling, no editor frameworks | `Rust` |
 | **[Meow](https://github.com/heisenberg-611/Meow-A-neko-Text-editor)** | A neko-themed text editor written in C, exploring low-level terminal I/O | `C` |
 | **[AI Agent](https://github.com/heisenberg-611/ai_agent)** | An LLM agent with function calling — reads and writes files, runs code, and iterates toward a goal | `Python` |
