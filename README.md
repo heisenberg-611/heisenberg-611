@@ -39,9 +39,8 @@
 
 ## About
 
-I'm a CS undergraduate who likes going one layer deeper than the abstraction I'm handed — which is how I've ended up writing a text editor in Rust, an interpreter from scratch, and a multi-tenant SaaS platform in the same year.
+I am a CSE undergrad who has an lethal amount of inquisitive nature. I want to go deeper to every topics I am interested in. I like to dissect things till I extracted all information out of it. HEHE!!!
 
-- 🔭 Currently building **[Cutline OS](https://github.com/heisenberg-611/Cutline_Business_Manager)** — a multi-tenant B2B business management platform for creative agencies
 - 🌱 Going deep on **graph algorithms, competitive programming, and distributed systems**
 - 💡 Interested in **systems programming, applied machine learning, and security**
 - 🤝 Open to collaborating on **open-source and academic projects**
@@ -119,6 +118,7 @@ I'm a CS undergraduate who likes going one layer deeper than the abstraction I'm
 | :--- | :--- | :--- |
 | **[porcupineResearch](https://github.com/heisenberg-611/porcupine-the-smart-research-manager)** | A literature review, from the first search to the finished evidence table. For teams running a systematic review that has to be reproducible, and for students running a thesis search on the same machinery. | `Next.js` `TypeScript` `Prisma` `Postgres` `Supabase` |
 | **[Teleporter](https://teleporter611.vercel.app/)** | Drop any document — beam an authentic claim ticket back. Markdown with real KaTeX math, LaTeX formulas, code syntax highlighting, CSV tables, PDFs and media rendered inline without sign-in walls. | `Next.js` `TypeScript` `Postgress` `Neon` |
+| **[MailCraft Studio](https://github.com/heisenberg-611/MailCraft_Studio)** | Fully on device HTML email signature & template generator engineered with W3C table layouts, HTML5 Canvas Retina (2x–4x) rasterizer, multi-MIME clipboard API, and CSV batch ZIP compiler. | `HTML` `Javascript` `CSS` |
 | **[Cutline OS](https://github.com/heisenberg-611/Cutline_Business_Manager)** | Multi-tenant B2B SaaS for creative agencies — projects, invoicing, client portals, and analytics in one platform | `Next.js` `TypeScript` `Prisma` `Postgres` `Supabase`|
 | **[Rust Text Editor](https://github.com/heisenberg-611/Rust-Text-Editor)** | A minimal terminal-based text editor built from scratch — raw-mode terminal handling, no editor frameworks | `Rust` |
 | **[Meow](https://github.com/heisenberg-611/Meow-A-neko-Text-editor)** | A neko-themed text editor written in C, exploring low-level terminal I/O | `C` |
