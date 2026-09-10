@@ -143,8 +143,6 @@ I am a CSE undergrad who has an lethal amount of inquisitive nature. I want to g
 
 <br /><br />
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=heisenberg-611&bg_color=0F1419&color=99D1CE&line=2AA889&point=00FFFF&title_color=2AA889&area=true&hide_border=true" alt="Contribution activity graph" />
-
 </div>
 
 ### Contribution Graph
