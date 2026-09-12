@@ -91,7 +91,7 @@ text, tspan {white-space: pre;}
   <text x="28" y="697" fill="#24292f" font-family="'Consolas', 'Menlo', 'DejaVu Sans Mono', monospace" xml:space="preserve" font-size="8">xxxxjjj::    ::jjjj3$o@@ooog@o@Qooowooou;|oxxxxjxxaogooggoggooxogoooooxxxoeaxoooxj1xxxj|jno@xogxxxxxxxogu:|xjixxxxxogon=::jj=+::  ::: : :</text>
 <text x="750" y="52"><tspan class="dash">─</tspan><tspan class="header"> dhrubojyoti@heisenberg-611 </tspan><tspan class="dash">────────────────────────────────</tspan></text>
   <text x="750" y="78"><tspan class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">Linux, macOS, Windows</tspan></text>
-  <text x="750" y="104"><tspan class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> .................. </tspan><tspan class="value" id="age_data">5 years, 1 month, 25 days</tspan></text>
+  <text x="750" y="104"><tspan class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> .................. </tspan><tspan class="value" id="age_data">5 years, 1 month, 26 days</tspan></text>
   <text x="750" y="130"><tspan class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">BRAC University</tspan></text>
   <text x="750" y="156"><tspan class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> .................. </tspan><tspan class="value">CS Undergrad &amp; Software Engineer</tspan></text>
   <text x="750" y="182"><tspan class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">VSCode, Neovim, IntelliJ</tspan></text>
