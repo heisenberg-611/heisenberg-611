@@ -18,7 +18,7 @@ jobs:
       - name: Generate GitHub Trophies
         uses: soulteary/github-profile-trophy-action@v1.0.0
         with:
-          username: heisenberg-611
+          options: 'username=${{ github.repository_owner }}&theme=gotham&column=7&margin-w=15&margin-h=15&title=AllSuperRank,MultiLanguage,Stars,Commits,Follower,Issues,PullRequest&show_icons=true'
           output_path: profile/trophy.svg
           token: ${{ secrets.ACCESS_TOKEN }}
 
