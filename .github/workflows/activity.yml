@@ -1,0 +1,32 @@
+name: Update Contribution Activity
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Generate Activity Graph
+        uses: maurodesouza/github-readme-activity-graph-action@v1
+        with:
+          username: heisenberg-611
+          options: theme=gotham&hide_border=true&area=true&custom_title=Dhrubojyoti's%20Contribution%20Activity
+          output_path: profile/activity-graph.svg
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Commit generated file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/activity-graph.svg
+          git commit -m "Update contribution activity" || exit 0
+          git push
