@@ -145,13 +145,23 @@ I am a CSE undergrad who has an lethal amount of inquisitive nature. I want to g
 
 </div>
 
-### Contribution Graph
+<div align="center">
+  <picture>
+    <img alt="Contribution_graph" src="./profile/activity-graph.svg" />
+  </picture>
+</div>
 
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./github-contribution-grid-snake-dark.svg" />
     <source media="(prefers-color-scheme: light)" srcset="./github-contribution-grid-snake.svg" />
     <img alt="Snake eating my contribution graph" src="./github-contribution-grid-snake.svg" />
+  </picture>
+</div>
+
+<div align="center">
+  <picture>
+    <img alt="trophies" src="./profile/trophy.svg" />
   </picture>
 </div>
 
