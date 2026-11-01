@@ -9,7 +9,7 @@
         aria-labelledby="descId"
       >
         <title id="titleId">Dhrubojyoti&#39;s GitHub Stats, Rank: B+</title>
-        <desc id="descId">Total Stars Earned: 65, Total Commits  : 1386, Total PRs: 60, Total Issues: 3, Contributed to (last year): 4</desc>
+        <desc id="descId">Total Stars Earned: 65, Total Commits  : 1425, Total PRs: 60, Total Issues: 3, Contributed to (last year): 4</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 124.20584620357077;
+        stroke-dashoffset: 123.8638729377767;
       }
     }
   
