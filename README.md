@@ -50,63 +50,25 @@ I am a CSE undergrad who has an lethal amount of inquisitive nature. I want to g
 
 ## Tech Stack
 
-<div align="center">
-<table>
-  <tr>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/python-icon.svg" width="58" height="58" alt="Python" /><br />Python
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/ts-icon.svg" width="58" height="58" alt="TypeScript" /><br />TypeScript
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/js-icon.svg" width="58" height="58" alt="JavaScript" /><br />JavaScript
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/cpp-icon.svg" width="58" height="58" alt="C++" /><br />C++
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/java-icon.svg" width="58" height="58" alt="Java" /><br />Java
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/csharp-icon.svg" width="58" height="58" alt="C#" /><br />C#
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/react-icon.svg" width="58" height="58" alt="React" /><br />React
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/django-icon.svg" width="58" height="58" alt="Django" /><br />Django
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/sass-icon.svg" width="58" height="58" alt="Sass" /><br />Sass
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/graphql-icon.svg" width="58" height="58" alt="GraphQL" /><br />GraphQL
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/mysql-icon.svg" width="58" height="58" alt="MySQL" /><br />MySQL
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/webpack-icon.svg" width="58" height="58" alt="Webpack" /><br />Webpack
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/github-icon.svg" width="58" height="58" alt="GitHub" /><br />GitHub
-    </td>
-    <td align="center" width="92">
-      <img src="https://techstack-generator.vercel.app/aws-icon.svg" width="58" height="58" alt="AWS" /><br />AWS
-    </td>
-  </tr>
-</table>
+
+<!-- Programming Languages, Frontend & Backend -->
+<img src="https://skillicons.dev/icons?i=rust,c,cpp,java,python,php,js,ts,html,css,nextjs,react,vue,nodejs,express,laravel,tailwind,bootstrap,jquery&theme=dark" alt="Programming Languages, Frontend and Backend" />
 
 <br />
 
-**Also working with**
+<!-- Databases, AI/ML & Data Science -->
+<img src="https://skillicons.dev/icons?i=postgres,mysql,mongodb,redis,prisma,sqlite,sklearn,pytorch,tensorflow,opencv&theme=dark" alt="Databases and AI/ML" />
 
-<img src="https://skillicons.dev/icons?i=rust,c,php,nextjs,nodejs,laravel,vue,tailwind,bootstrap,jquery&theme=dark" alt="Rust, C, PHP, Next.js, Node.js, Laravel, Vue, Tailwind, Bootstrap, jQuery" />
 <br />
-<img src="https://skillicons.dev/icons?i=postgres,mongodb,prisma,sklearn,pytorch,tensorflow,opencv,git,linux,vscode&theme=dark" alt="Postgres, MongoDB, Prisma, scikit-learn, PyTorch, TensorFlow, OpenCV, Git, Linux, VS Code" />
+
+<!-- DevOps, Cloud & Tools -->
+<img src="https://skillicons.dev/icons?i=git,github,linux,bash,docker,kubernetes,nginx,cloudflare,vercel,aws,azure,vscode,idea,postman,figma&theme=dark" alt="DevOps, Cloud and Development Tools" />
+
+<br />
+
+<!-- Additional Technologies -->
+<img src="https://skillicons.dev/icons?i=anaconda,cmake,arduino,raspberrypi,graphql,fastapi,flask,supabase,firebase&theme=dark" alt="Additional Technologies" />
+
 
 </div>
 
