@@ -78,6 +78,7 @@ I am a CSE undergrad who has an lethal amount of inquisitive nature. I want to g
 
 | Project | What it is | Stack |
 | :--- | :--- | :--- |
+| **[TrueLabel](https://github.com/heisenberg-611/TrueLabel)** | Packaged food transparency, from ingredient analysis to dietary action. For consumers navigating allergens, expired lots, and recalled foods, and for regulatory inspectors auditing food-safety compliance records. | `NestJS` `TypeScript` `PostgreSQL` `TypeORM` `Handlebars` `Tailwind CSS` |
 | **[porcupineResearch](https://github.com/heisenberg-611/porcupine-the-smart-research-manager)** | A literature review, from the first search to the finished evidence table. For teams running a systematic review that has to be reproducible, and for students running a thesis search on the same machinery. | `Next.js` `TypeScript` `Prisma` `Postgres` `Supabase` |
 | **[Teleporter](https://tport.site/)** | Drop any document — beam an authentic claim ticket back. Markdown with real KaTeX math, LaTeX formulas, code syntax highlighting, CSV tables, PDFs and media rendered inline without sign-in walls. | `Next.js` `TypeScript` `Postgress` `Neon` |
 | **[MailCraft Studio](https://github.com/heisenberg-611/MailCraft_Studio)** | Fully on device HTML email signature & template generator engineered with W3C table layouts, HTML5 Canvas Retina (2x–4x) rasterizer, multi-MIME clipboard API, and CSV batch ZIP compiler. | `HTML` `Javascript` `CSS` |
