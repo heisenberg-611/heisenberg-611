@@ -25,20 +25,17 @@
 
 <br />
 
-<a href="https://github.com/heisenberg-611">
+<!-- <a href="https://github.com/heisenberg-611">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./dark_mode.svg" />
     <source media="(prefers-color-scheme: light)" srcset="./light_mode.svg" />
     <img alt="Dhrubojyoti Saha's GitHub Profile System" src="./dark_mode.svg" width="100%" />
   </picture>
-</a>
+</a> -->
 
 </div>
 
----
-
 ## About
-
 I am a CSE undergrad who has an lethal amount of inquisitive nature. I want to go deeper to every topics I am interested in. I like to dissect things till I extracted all information out of it. HEHE!!!
 
 - 🌱 Going deep on **graph algorithms, competitive programming, and distributed systems**
